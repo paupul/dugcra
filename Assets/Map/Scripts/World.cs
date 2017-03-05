@@ -7,6 +7,7 @@ public class World : MonoBehaviour {
 
     public Dictionary<WorldPos, Grid> grids = new Dictionary<WorldPos, Grid>();
     public GameObject gridPrefab;
+    public bool isFogGenerator = false;
 
     public string worldName = "World";
 
@@ -22,9 +23,9 @@ public class World : MonoBehaviour {
 
         newGrid.pos = worldPos;
         newGrid.world = this;
-        if (!SaveAndLoadManager.LoadGrid(newGrid))
+        if (isFogGenerator || !SaveAndLoadManager.LoadGrid(newGrid))
         {
-            newGrid = gen.GridGen(newGrid);
+            newGrid = gen.GridGen(newGrid, isFogGenerator);
         }
 
         grids.Add(worldPos, newGrid);        
@@ -42,6 +43,36 @@ public class World : MonoBehaviour {
         grids.TryGetValue(pos, out containerGrid);
 
         return containerGrid;
+    }
+
+    public void SetTile(int x, int y, GridTile tile)
+    {
+        Grid grid = GetGrid(x, y);
+
+        if (grid != null)
+        {
+            grid.SetTile(x - grid.pos.x, y - grid.pos.y, tile);
+            grid.update = true;
+        }
+    }
+
+    public GridTile GetTile(int x, int y)
+    {
+        Grid containerGrid = GetGrid(x, y);
+
+        if (containerGrid != null)
+        {
+            GridTile block = containerGrid.GetTile(
+                x - containerGrid.pos.x,
+                y - containerGrid.pos.y);
+
+            return block;
+        }
+        else
+        {
+            return new GridTile(GridTile.TileTypes.Empty);
+        }
+
     }
 
     internal void DestroyGrid(int x, int y)

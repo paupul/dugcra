@@ -7,7 +7,7 @@ using UnityEngine;
 [Serializable]
 public class GridTile
 {
-    public enum TileTypes { Ground, Wall, Empty }
+    public enum TileTypes { Ground, Wall, Empty, Fog }
     public struct Tile { public int x, y; }
     const float tileSize = 0.125f;
     public TileTypes type;
@@ -34,7 +34,11 @@ public class GridTile
 
     public virtual MeshData TileData(Grid grid, int x, int y, MeshData meshData)
     {
-        if (type == TileTypes.Wall)
+        if (type == TileTypes.Empty)
+        {
+            return meshData;
+        }
+        else if (type == TileTypes.Wall || type == TileTypes.Fog)
         {
             meshData.useRenderDataForCol = true;
         }
@@ -63,7 +67,7 @@ public class GridTile
         }
         else if (type == TileTypes.Wall)
         {
-            
+            #region if checks
             //  / 0 \
             //  1   2
             //  \ 3 /
@@ -145,7 +149,7 @@ public class GridTile
 
 
             if (adjTiles[2] == TileTypes.Ground)
-            {                
+            {
                 if (adjTiles[3] == TileTypes.Ground)
                 {
                     tile.x = 4;
@@ -244,8 +248,8 @@ public class GridTile
                 tile.x = 2;
                 tile.y = 4;
                 return tile;
-            }      
-                  
+            }
+
             //  2 - 3
 
             if (diagTiles[2] == TileTypes.Ground)
@@ -271,6 +275,16 @@ public class GridTile
 
             tile.x = 6;
             tile.y = 1;
+            #endregion
+        }
+        else if (type == TileTypes.Fog)
+        {
+            tile.x = 6;
+            tile.y = 1;
+        }
+        else if (type == TileTypes.Empty)
+        {
+            return tile;
         }
         return tile;
     }

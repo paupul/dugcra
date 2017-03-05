@@ -61,6 +61,11 @@ public class Grid : MonoBehaviour
     {
         tiles[x, y] = tile;
     }
+
+    public GridTile GetTile(int x, int y)
+    {
+        return tiles[x, y];
+    }
     
     public void RenewTiles()
     {

@@ -8,8 +8,10 @@ public class SpriteMove : MonoBehaviour {
     Vector3 mousePos;
     Vector3 mouseDir;
 
-	// Use this for initialization
-	void Start () {
+    public World fog;
+
+    // Use this for initialization
+    void Start () {
         rigid = GetComponent<Rigidbody2D>();
 	}
 	
@@ -23,6 +25,15 @@ public class SpriteMove : MonoBehaviour {
         if (Input.GetMouseButton(0))
         {
             rigid.AddForce((mouseDir) * 100);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        WorldPos pos = EditTerrain.GetBlockPos(collision.contacts[0].point);
+        if (collision.collider.GetComponent<Grid>())
+        {
+            fog.SetTile(pos.x, pos.y, new GridTile(GridTile.TileTypes.Empty));
         }
     }
 }

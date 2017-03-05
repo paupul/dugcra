@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour {
 
     Camera cam;
+    public World fog;
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +24,16 @@ public class CameraMovement : MonoBehaviour {
         
         transform.position = position;
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Vector2 rayPos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            RaycastHit2D hit = Physics2D.Raycast(rayPos, Vector2.zero);
+            WorldPos pos = EditTerrain.GetBlockPos(hit);
+            if (hit.collider != null && hit.collider.GetComponent<Grid>())
+            {
+                fog.SetTile(pos.x, pos.y, new GridTile(GridTile.TileTypes.Empty));
+            }
+        }
         if (Input.GetMouseButtonDown(1))
         {
             cam.orthographicSize = 5;
