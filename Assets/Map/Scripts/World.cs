@@ -28,7 +28,10 @@ public class World : MonoBehaviour {
             newGrid = gen.GridGen(newGrid, isFogGenerator);
         }
 
-        grids.Add(worldPos, newGrid);        
+        grids.Add(worldPos, newGrid);
+
+        newGridObject.layer = 9;
+
     }
 
     public Grid GetGrid(int x, int y)

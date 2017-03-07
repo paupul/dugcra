@@ -8,21 +8,16 @@ public class Player : MonoBehaviour
 {
 
     public float turnDelay;
-    //public float speed;
     private Rigidbody2D rb2D;
-    private bool move;
-    public LayerMask blockingLayer;
-    public LayerMask layer;
-    public AudioClip tempAudio;
-    private new AudioSource audio;
+    private bool idle;
+    public LayerMask fog;
+    public LayerMask wall;
+    public World fogWorld;
 
     protected void Start()
     {
-        move = true;
+        idle = true;
         rb2D = GetComponent<Rigidbody2D>();
-
-        audio = GetComponent<AudioSource>();
-        audio.clip = tempAudio;
     }
 
     void Update()
@@ -31,70 +26,59 @@ public class Player : MonoBehaviour
         int vertical = 0;
         horizontal = (int)Input.GetAxisRaw("Horizontal");
         vertical = (int)Input.GetAxisRaw("Vertical");
+
         if (horizontal != 0)
         {
             vertical = 0;
         }
-        if ((horizontal != 0 || vertical != 0)&&move)
+        if ((horizontal != 0 || vertical != 0)&& idle)
         {
-            move = false;
-            if(AttemptMove(horizontal, vertical))
-            {
-                print("Moved");
-            }
+            idle = false;
+            //print("not idle");
+            AttemptMove(horizontal, vertical);
+            
         }
 
     }
 
-    public bool AttemptMove(int xDir, int yDir)
+    public void AttemptMove(int xDir, int yDir)
     {
         Vector2 end = rb2D.position + new Vector2(xDir, yDir);
-
-        RaycastHit2D[] hit;
-        RaycastHit2D[] notHit;
-        hit = Physics2D.LinecastAll(rb2D.position, end, blockingLayer);
-        notHit = Physics2D.LinecastAll(rb2D.position, end, layer);
-
-        if (hit.Length==0)
+        RaycastHit2D fogDetect;
+        RaycastHit2D walldetect;
+        fogDetect = Physics2D.Raycast(rb2D.position, end);
+        Debug.Log(end.y);
+        walldetect = Physics2D.Linecast(rb2D.position, end, wall);
+        WorldPos pos = EditTerrain.GetBlockPos(end);
+        Debug.Log(pos.y);
+        if (fogDetect)
         {
-            for (int i = 0; i < notHit.Length; i++)
-            {
-                GameObject.Find(notHit[i].transform.name).GetComponent<SpriteRenderer>().enabled = false;
-                print(notHit[i].transform.name);
-            }
-            StartCoroutine(Move(end));
-            return true;
+            fogWorld.SetTile(pos.x, pos.y, new GridTile(GridTile.TileTypes.Empty));
         }
-        else
-        {
-            for(int i = 0; i < hit.Length; i++)
-            {
-                GameObject.Find(hit[i].transform.name).GetComponent<SpriteRenderer>().enabled = false;
-                print(hit[i].transform.name);
-            }
-            move = true;
-        }
-        return false;
-
-    }
-    IEnumerator Move(Vector2 end)
-    {
-        yield return new WaitForSeconds(turnDelay);
-        rb2D.MovePosition(end);
-        audio.Play();
-        move = true;
-
-        //float sqrRemainingDistance = (rb2D.position - end).sqrMagnitude;
-
-        //while (sqrRemainingDistance > float.Epsilon)
+        //if (fogDetect)
         //{
-        //    Vector3 newPostion = Vector3.MoveTowards(rb2D.position, end, speed * Time.deltaTime);
-
-        //    rb2D.MovePosition(newPostion);
-
-        //    sqrRemainingDistance = (rb2D.position - end).sqrMagnitude;
-        //    yield return null;
+        //    GameObject.Find(fogDetect.transform.name).GetComponent<SpriteRenderer>().enabled = false;
+        //    print(fogDetect.transform.name);
+        //    GameObject.Find(fogDetect.transform.name).GetComponent<BoxCollider2D>().enabled = false;
+        //    Destroy(GameObject.Find(fogDetect.transform.name).GetComponent<GameObject>());
         //}
+        if (!walldetect)
+        {
+            //print(walldetect.transform.name);
+            rb2D.MovePosition(end);
+            //print("Moved");
+            
+        }
+        StartCoroutine(Delay());
+    }
+    IEnumerator Delay()
+    {
+        
+        yield return new WaitForSeconds(turnDelay);
+        //print("idle");
+        idle = true;
+        
+        
     }
 
 }
