@@ -40,11 +40,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnGUI()
-    {
-        GUI.Box(new Rect(new Vector2(0, 0), new Vector2(50, 20)), horizontal + " " + vertical);
-    }
-
     public void AttemptMove(int xDir, int yDir)
     {
         Vector2 end = rb2D.position + new Vector2(xDir, yDir);
