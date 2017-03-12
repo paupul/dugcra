@@ -19,7 +19,6 @@ public static class EditTerrain
             MoveWithinBlock(hit.point.x, hit.normal.x, adjacent),
             MoveWithinBlock(hit.point.y, hit.normal.y, adjacent)
             );
-
         return GetBlockPos(pos);
     }
 
@@ -27,14 +26,16 @@ public static class EditTerrain
     {
         if (pos - (int)pos == 0.5f || pos - (int)pos == -0.5f)
         {
-            if (adjacent)
-            {
-                pos += (norm / 2);
-            }
-            else
-            {
-                pos -= (norm / 2);
-            }
+            pos -= 0.5f;
+        }
+        //else
+        //if (norm == -1)
+        //{
+        //    pos -= 0.5f;
+        //}
+        else if (norm == 1)
+        {
+            pos -= 1f;
         }
 
         return pos;

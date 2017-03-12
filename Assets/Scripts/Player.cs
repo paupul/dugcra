@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     public float turnDelay;
     private Rigidbody2D rb2D;
     private bool idle;
@@ -20,10 +19,13 @@ public class Player : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
     }
 
+    int horizontal = 0;
+    int vertical = 0;
+
     void Update()
     {
-        int horizontal = 0;
-        int vertical = 0;
+        horizontal = 0;
+        vertical = 0;
         horizontal = (int)Input.GetAxisRaw("Horizontal");
         vertical = (int)Input.GetAxisRaw("Vertical");
 
@@ -31,14 +33,16 @@ public class Player : MonoBehaviour
         {
             vertical = 0;
         }
-        if ((horizontal != 0 || vertical != 0)&& idle)
+        if ((horizontal != 0 || vertical != 0) && idle)
         {
             idle = false;
-            //print("not idle");
             AttemptMove(horizontal, vertical);
-            
         }
+    }
 
+    private void OnGUI()
+    {
+        GUI.Box(new Rect(new Vector2(0, 0), new Vector2(50, 20)), horizontal + " " + vertical);
     }
 
     public void AttemptMove(int xDir, int yDir)
@@ -46,11 +50,10 @@ public class Player : MonoBehaviour
         Vector2 end = rb2D.position + new Vector2(xDir, yDir);
         RaycastHit2D fogDetect;
         RaycastHit2D walldetect;
-        fogDetect = Physics2D.Raycast(rb2D.position, end);
-        Debug.Log(end.y);
-        walldetect = Physics2D.Linecast(rb2D.position, end, wall);
-        WorldPos pos = EditTerrain.GetBlockPos(end);
-        Debug.Log(pos.y);
+        fogDetect = Physics2D.Linecast(rb2D.position, end);
+        walldetect = Physics2D.Linecast(rb2D.position, end);        
+        WorldPos pos = EditTerrain.GetBlockPos(fogDetect);
+        //Debug.Log(pos.x + " " + pos.y);
         if (fogDetect)
         {
             fogWorld.SetTile(pos.x, pos.y, new GridTile(GridTile.TileTypes.Empty));
@@ -64,21 +67,14 @@ public class Player : MonoBehaviour
         //}
         if (!walldetect)
         {
-            //print(walldetect.transform.name);
             rb2D.MovePosition(end);
-            //print("Moved");
-            
         }
         StartCoroutine(Delay());
     }
     IEnumerator Delay()
     {
-        
         yield return new WaitForSeconds(turnDelay);
-        //print("idle");
         idle = true;
-        
-        
     }
 
 }
