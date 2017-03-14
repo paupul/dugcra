@@ -12,15 +12,14 @@ public class Player : MonoBehaviour
     public LayerMask fog;
     public LayerMask wall;
     public World fogWorld;
+    private int horizontal;
+    private int vertical;
 
     protected void Start()
     {
         idle = true;
         rb2D = GetComponent<Rigidbody2D>();
     }
-
-    int horizontal = 0;
-    int vertical = 0;
 
     void Update()
     {
@@ -36,8 +35,11 @@ public class Player : MonoBehaviour
         if ((horizontal != 0 || vertical != 0) && idle)
         {
             idle = false;
+            //print("not idle");
             AttemptMove(horizontal, vertical);
+
         }
+
     }
 
     public void AttemptMove(int xDir, int yDir)
@@ -45,14 +47,16 @@ public class Player : MonoBehaviour
         Vector2 end = rb2D.position + new Vector2(xDir, yDir);
         RaycastHit2D fogDetect;
         RaycastHit2D walldetect;
+
         fogDetect = Physics2D.Linecast(rb2D.position, end);
-        walldetect = Physics2D.Linecast(rb2D.position, end);        
+        walldetect = Physics2D.Linecast(rb2D.position, end, wall); //nekeisti
         WorldPos pos = EditTerrain.GetBlockPos(fogDetect);
         //Debug.Log(pos.x + " " + pos.y);
         if (fogDetect)
         {
             fogWorld.SetTile(pos.x, pos.y, new GridTile(GridTile.TileTypes.Empty));
         }
+
         //if (fogDetect)
         //{
         //    GameObject.Find(fogDetect.transform.name).GetComponent<SpriteRenderer>().enabled = false;
