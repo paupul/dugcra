@@ -163,31 +163,37 @@ public class GridGenerator
 
         while (validNodes.Count > 0)
         {
+            int rand_node = 0;
+
             List<Node> readyNeighbours = new List<Node>();
 
-            if (validNodes[0][0] != null && validNodes[0][0].isWall 
-                && validNodes[0][0].left != null && validNodes[0][0].right != null
-                && validNodes[0][0].left.isWall && validNodes[0][0].right.isWall)
+            if (validNodes[rand_node][0] != null && validNodes[rand_node][0].isWall 
+                && validNodes[rand_node][0].left != null && validNodes[rand_node][0].right != null
+                && validNodes[rand_node][0].left.isWall && validNodes[rand_node][0].right.isWall
+                && validNodes[rand_node][0].up != null && validNodes[rand_node][0].up.isWall)
             {
-                readyNeighbours.Add(validNodes[0][0]);
+                readyNeighbours.Add(validNodes[rand_node][0]);
             }
-            if (validNodes[0][1] != null && validNodes[0][1].isWall 
-                && validNodes[0][1].up != null && validNodes[0][1].down != null
-                && validNodes[0][1].up.isWall && validNodes[0][1].down.isWall)
+            if (validNodes[rand_node][1] != null && validNodes[rand_node][1].isWall 
+                && validNodes[rand_node][1].up != null && validNodes[rand_node][1].down != null
+                && validNodes[rand_node][1].up.isWall && validNodes[rand_node][1].down.isWall
+                && validNodes[rand_node][1].right != null && validNodes[rand_node][1].right.isWall)
             {
-                readyNeighbours.Add(validNodes[0][1]);
+                readyNeighbours.Add(validNodes[rand_node][1]);
             }
-            if (validNodes[0][2] != null && validNodes[0][2].isWall
-                && validNodes[0][2].left != null && validNodes[0][2].right != null
-                && validNodes[0][2].left.isWall && validNodes[0][2].right.isWall)
+            if (validNodes[rand_node][2] != null && validNodes[rand_node][2].isWall
+                && validNodes[rand_node][2].left != null && validNodes[rand_node][2].right != null
+                && validNodes[rand_node][2].left.isWall && validNodes[rand_node][2].right.isWall
+                && validNodes[rand_node][2].down != null && validNodes[rand_node][2].down.isWall)
             {
-                readyNeighbours.Add(validNodes[0][2]);
+                readyNeighbours.Add(validNodes[rand_node][2]);
             }
-            if (validNodes[0][3] != null && validNodes[0][3].isWall 
-                && validNodes[0][3].up != null && validNodes[0][3].down != null
-                && validNodes[0][3].up.isWall && validNodes[0][3].down.isWall)
+            if (validNodes[rand_node][3] != null && validNodes[rand_node][3].isWall 
+                && validNodes[rand_node][3].up != null && validNodes[rand_node][3].down != null
+                && validNodes[rand_node][3].up.isWall && validNodes[rand_node][3].down.isWall 
+                && validNodes[rand_node][3].left != null && validNodes[rand_node][3].left.isWall)
             {
-                readyNeighbours.Add(validNodes[0][3]);
+                readyNeighbours.Add(validNodes[rand_node][3]);
             }
 
 
