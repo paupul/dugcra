@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
         RaycastHit2D walldetect;
 
         fogDetect = Physics2D.Linecast(rb2D.position, end);
-        walldetect = Physics2D.Linecast(rb2D.position, end, wall); //nekeisti
+        walldetect = Physics2D.Linecast(rb2D.position, end); //nekeisti
         WorldPos pos = EditTerrain.GetBlockPos(fogDetect);
         //Debug.Log(pos.x + " " + pos.y);
         if (fogDetect)
