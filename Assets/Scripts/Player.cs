@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
         if ((horizontal != 0 || vertical != 0) && idle)
         {
             idle = false;
-            //print("not idle");
+
             AttemptMove(horizontal, vertical);
 
         }
