@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     private int horizontal;
     private int vertical;
 
+    public ScoreManager scoreManager;
+
     protected void Start()
     {
         idle = true;
@@ -55,8 +57,8 @@ public class Player : MonoBehaviour
         if (fogDetect)
         {
             fogWorld.SetTile(pos.x, pos.y, new GridTile(GridTile.TileTypes.Empty));
+            scoreManager.AddPoints(1);
         }
-
         //if (fogDetect)
         //{
         //    GameObject.Find(fogDetect.transform.name).GetComponent<SpriteRenderer>().enabled = false;

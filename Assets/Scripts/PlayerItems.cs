@@ -7,74 +7,75 @@ public class PlayerItems : MonoBehaviour {
 
     private int spear;
     private int ladder;
+    private static int pointsForItem;
+    private static int pointsForEnemy;
+    private static int pointsForChest;
 
-    // Use this for initialization
+    public ScoreManager scoreManager;
+
     void Start () {
-        //Get the current food point total stored in GameManager.instance between levels.
-        //spear = GameManager.instance.playerFoodPoints;
         spear = 0;
         ladder = 0;
+        pointsForItem = 5;
+        pointsForEnemy = 10;
+        pointsForChest = 50;
     }
 	
-	// Update is called once per frame
 	void Update () {
-		
-	}
+    }
 
-    //OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
     private void OnTriggerEnter2D(Collider2D other)
     {
-        ////Check if the tag of the trigger collided with is Exit.
-        //if (other.tag == "Exit")
-        //{
-        //    //Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
-        //    Invoke("Restart", restartLevelDelay);
-
-        //    //Disable the player object since level is over.
-        //    enabled = false;
-        //}
-
-        //Check if the tag of the trigger collided with is Spear.
         if (other.tag == "Spear")
         {
-            //Add spear to the players current spears total.
             spear++;
+            scoreManager.AddPoints(pointsForItem);
             print("Spear count:" + spear);
-
-            //Disable the spear object the player collided with.
             other.gameObject.SetActive(false);
         }
-        //Check if the tag of the trigger collided with is Ladder.
         else if (other.tag == "Ladder")
         {
-            //Add Ladder to the players current Ladder total.
             ladder++;
+            scoreManager.AddPoints(pointsForItem);
             print("Ladder count:" + ladder);
-
-            //Disable the Ladder object the player collided with.
             other.gameObject.SetActive(false);
         }
-        //Check if the tag of the trigger collided with is Monster.
+
         else if (other.tag == "Monster")
         {
             if (spear <= 0)
             {
-                //MonoBehaviour.Destroy(this);
                 print("Game over...:");
                 SceneManager.LoadScene(0);
             }
             else
             {
-                //Removes ladder from the players current ladder total.
 				spear--;
                 print("Spear count:" + spear);
-
-                //Disable the food object the player collided with.
+                scoreManager.AddPoints(pointsForEnemy);
+                other.gameObject.SetActive(false);
+            }
+        }
+        else if (other.tag == "Pit")
+        {
+            if (ladder <= 0)
+            {
+                print("Game over...:");
+                scoreManager.Reset();
+                SceneManager.LoadScene(0);
+            }
+            else
+            {
+                ladder--;
+                print("Ladder count:" + ladder);
+                scoreManager.AddPoints(pointsForEnemy);
                 other.gameObject.SetActive(false);
             }
         }
         else if (other.tag == "Chest")
         {
+            scoreManager.AddPoints(pointsForChest);
+            scoreManager.SaveCurrentPoints();
             SceneManager.LoadScene(1);
         }
     }
