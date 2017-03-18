@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerItems : MonoBehaviour {
+public class PlayerItems : MonoBehaviour
+{
 
     private int spear;
     private int ladder;
@@ -13,15 +14,17 @@ public class PlayerItems : MonoBehaviour {
 
     public ScoreManager scoreManager;
 
-    void Start () {
+    void Start()
+    {
         spear = 0;
         ladder = 0;
         pointsForItem = 5;
         pointsForEnemy = 10;
         pointsForChest = 50;
     }
-	
-	void Update () {
+
+    void Update()
+    {
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -50,7 +53,7 @@ public class PlayerItems : MonoBehaviour {
             }
             else
             {
-				spear--;
+                spear--;
                 print("Spear count:" + spear);
                 scoreManager.AddPoints(pointsForEnemy);
                 other.gameObject.SetActive(false);
@@ -61,7 +64,6 @@ public class PlayerItems : MonoBehaviour {
             if (ladder <= 0)
             {
                 print("Game over...:");
-                scoreManager.Reset();
                 SceneManager.LoadScene(0);
             }
             else

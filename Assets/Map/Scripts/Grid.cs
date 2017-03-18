@@ -9,7 +9,7 @@ public class Grid : MonoBehaviour
     public GridTile[,] tiles = new GridTile[gridSize, gridSize];
 
     private Mesh mesh;
-    public static int gridSize = 7;
+    public static int gridSize = 16;
     public int xSize, ySize;
     public bool update;
     public bool save;
