@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
 
     protected void Start()
     {
+        loaded = false;
         idle = true;
         rb2D = GetComponent<Rigidbody2D>();
         gameSounds = GetComponent<GameSounds>();
@@ -37,7 +38,7 @@ public class Player : MonoBehaviour
         {
             loaded = true;
             Grid g = fogWorld.GetGrid(world.startingPoint.x, world.startingPoint.y);
-            g.SetTile(world.startingPoint.x, world.startingPoint.y, new GridTile(GridTile.TileTypes.Ground));
+            g.SetTile(world.startingPoint.x, world.startingPoint.y, new GridTile(GridTile.TileTypes.Empty));
             g.update = true;
             transform.position = new Vector3((int)world.startingPoint.x + 0.5f, (int)world.startingPoint.y + 0.5f, transform.position.z);
         }
@@ -67,7 +68,7 @@ public class Player : MonoBehaviour
         RaycastHit2D walldetect;
 
 
-        fogDetect = Physics2D.Linecast(rb2D.position, end);
+        fogDetect = Physics2D.Linecast(rb2D.position, end, fog);
         walldetect = Physics2D.Linecast(rb2D.position, end, wall); //nekeisti
 
 
@@ -76,7 +77,7 @@ public class Player : MonoBehaviour
         if (fogDetect)
         {
             fogWorld.SetTile(pos.x, pos.y, new GridTile(GridTile.TileTypes.Empty));
-            scoreManager.AddPoints(1);
+            scoreManager.AddPoints(1);            
         }
         //if (fogDetect)
         //{
@@ -85,7 +86,7 @@ public class Player : MonoBehaviour
         //    GameObject.Find(fogDetect.transform.name).GetComponent<BoxCollider2D>().enabled = false;
         //    Destroy(GameObject.Find(fogDetect.transform.name).GetComponent<GameObject>());
         //}
-        if (!walldetect)
+        if (!walldetect && !fogDetect)
         {
             gameSounds.PlaySound(0);
             rb2D.MovePosition(end);

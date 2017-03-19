@@ -19,7 +19,15 @@ public class World : MonoBehaviour {
         WorldPos worldPos = new WorldPos(x, y);
 
         GameObject newGridObject = Instantiate(gridPrefab, new Vector3(x, y), Quaternion.Euler(Vector3.zero)) as GameObject;
-        newGridObject.layer = 9;
+        if (isFogGenerator)
+        {
+            newGridObject.transform.position = new Vector3(x, y, -1);
+            newGridObject.layer = 8;
+        }
+        else
+        {
+            newGridObject.layer = 9;
+        }
         Grid newGrid = newGridObject.GetComponent<Grid>();
 
         GridGenerator gen = new GridGenerator();
@@ -31,7 +39,7 @@ public class World : MonoBehaviour {
             newGrid = gen.GridGen(newGrid, out isPointGenerated, out startingPoint, isFogGenerator);
         }
 
-        newGrid = gen.GridTileGen(newGrid, startingPoint.x, startingPoint.y, GridTile.TileTypes.Empty);
+        //newGrid = gen.GridTileGen(newGrid, startingPoint.x, startingPoint.y, GridTile.TileTypes.Empty);
         
         grids.Add(worldPos, newGrid);        
     }
