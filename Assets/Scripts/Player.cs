@@ -16,11 +16,13 @@ public class Player : MonoBehaviour
     private int vertical;
 
     public ScoreManager scoreManager;
+    public GameSounds gameSounds;
 
     protected void Start()
     {
         idle = true;
         rb2D = GetComponent<Rigidbody2D>();
+        gameSounds = GetComponent<GameSounds>();
     }
 
     void Update()
@@ -68,6 +70,7 @@ public class Player : MonoBehaviour
         //}
         if (!walldetect)
         {
+            gameSounds.PlaySound(0);
             rb2D.MovePosition(end);
         }
         StartCoroutine(Delay());

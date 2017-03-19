@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pause : MonoBehaviour {
     
     public GameObject pauseMenu;
+    public GameObject map;
     bool isPaused = false;
 
 	// Use this for initialization
@@ -13,7 +14,7 @@ public class Pause : MonoBehaviour {
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !map.activeInHierarchy)
         {
             isPaused = !isPaused;
             Pause_action(isPaused);
