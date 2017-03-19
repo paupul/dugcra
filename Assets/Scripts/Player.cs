@@ -12,11 +12,13 @@ public class Player : MonoBehaviour
     public LayerMask fog;
     public LayerMask wall;
     public World fogWorld;
+    public World world;
     private int horizontal;
     private int vertical;
+    private bool loaded;
 
     public ScoreManager scoreManager;
-    public GameSounds gameSounds;
+    private GameSounds gameSounds;
 
     protected void Start()
     {
@@ -27,6 +29,18 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!world.isPointGenerated)
+        {
+            return;
+        }
+        else if (!loaded)
+        {
+            loaded = true;
+            Grid g = fogWorld.GetGrid(world.startingPoint.x, world.startingPoint.y);
+            g.SetTile(world.startingPoint.x, world.startingPoint.y, new GridTile(GridTile.TileTypes.Ground));
+            g.update = true;
+            transform.position = new Vector3((int)world.startingPoint.x + 0.5f, (int)world.startingPoint.y + 0.5f, transform.position.z);
+        }
         horizontal = 0;
         vertical = 0;
         horizontal = (int)Input.GetAxisRaw("Horizontal");
@@ -52,8 +66,11 @@ public class Player : MonoBehaviour
         RaycastHit2D fogDetect;
         RaycastHit2D walldetect;
 
+
         fogDetect = Physics2D.Linecast(rb2D.position, end);
-        walldetect = Physics2D.Linecast(rb2D.position, end); //nekeisti
+        walldetect = Physics2D.Linecast(rb2D.position, end, wall); //nekeisti
+
+
         WorldPos pos = EditTerrain.GetBlockPos(fogDetect);
         //Debug.Log(pos.x + " " + pos.y);
         if (fogDetect)

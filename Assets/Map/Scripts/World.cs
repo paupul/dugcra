@@ -9,6 +9,9 @@ public class World : MonoBehaviour {
     public GameObject gridPrefab;
     public bool isFogGenerator = false;
 
+    public WorldPos startingPoint;
+    public bool isPointGenerated = false;
+
     public string worldName = "World";
 
     public void CreateGrid(int x, int y)
@@ -16,7 +19,7 @@ public class World : MonoBehaviour {
         WorldPos worldPos = new WorldPos(x, y);
 
         GameObject newGridObject = Instantiate(gridPrefab, new Vector3(x, y), Quaternion.Euler(Vector3.zero)) as GameObject;
-
+        newGridObject.layer = 9;
         Grid newGrid = newGridObject.GetComponent<Grid>();
 
         GridGenerator gen = new GridGenerator();
@@ -25,9 +28,11 @@ public class World : MonoBehaviour {
         newGrid.world = this;
         if (isFogGenerator || !SaveAndLoadManager.LoadGrid(newGrid))
         {
-            newGrid = gen.GridGen(newGrid, isFogGenerator);
+            newGrid = gen.GridGen(newGrid, out isPointGenerated, out startingPoint, isFogGenerator);
         }
 
+        newGrid = gen.GridTileGen(newGrid, startingPoint.x, startingPoint.y, GridTile.TileTypes.Empty);
+        
         grids.Add(worldPos, newGrid);        
     }
 

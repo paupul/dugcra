@@ -9,8 +9,11 @@ public class GridGenerator
     List<List<Node>> maze = new List<List<Node>>();
 
 
-    public Grid GridGen(Grid grid, bool isFogGenerator = false)
-    {        
+    public Grid GridGen(Grid grid, out bool isPointGenerated, out WorldPos startingPoint, bool isFogGenerator = false)
+    {
+        isPointGenerated = false;
+        startingPoint = new WorldPos(0, 0);
+
         if (isFogGenerator)
         {
             for (int x = grid.pos.x; x < grid.pos.x + Grid.gridSize; x++)
@@ -33,13 +36,18 @@ public class GridGenerator
                         grid = GridTileGen(grid, x, y, GridTile.TileTypes.Wall);
                     }
                     else grid = GridTileGen(grid, x, y, GridTile.TileTypes.Ground);
+                    if (maze[x][y].isStart)
+                    {
+                        startingPoint = new WorldPos(x, y);
+                        isPointGenerated = true;
+                    }
                 }
             }
         }
         return grid;
     }
 
-    private Grid GridTileGen(Grid grid, int x, int y, GridTile.TileTypes type)
+    public Grid GridTileGen(Grid grid, int x, int y, GridTile.TileTypes type)
     {
         grid.SetTile(x - grid.pos.x, y - grid.pos.y, new GridTile(type));
         return grid;
