@@ -9,13 +9,18 @@ public class ScoreManager : MonoBehaviour {
 
     public static int highscore;
 
+    public GUIText scoreText;
+
     void Start()
     {
+
         score = PlayerPrefs.GetInt("score");
+        scoreText.text = "Score: " + score;
+
         PlayerPrefs.SetInt("score", 0);
 
         highscore = PlayerPrefs.GetInt("highscore", highscore);
-        print("Points count:" + score);
+        //print("Points count:" + score);
     }
     void Update()
     {
@@ -29,17 +34,21 @@ public class ScoreManager : MonoBehaviour {
     public void AddPoints(int pointsToAdd)
     {
         score += pointsToAdd;
-        print("Points count:" + score);
+        scoreText.text = "Score: " + score;
+        //print("Points count:" + score);
+
     }
 
     public void Reset()
     {
         score = 0;
+        scoreText.text = "Score: " + score;
     }
 
     public void SaveCurrentPoints()
     {
         PlayerPrefs.SetInt("score", score);
-        print("Points count:" + score);
+        scoreText.text = "Score: " + score;
+        //print("Points count:" + score);
     }
 }
