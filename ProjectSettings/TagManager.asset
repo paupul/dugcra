@@ -9,6 +9,7 @@ TagManager:
   - Spear
   - Chest
   - Pit
+  - Game_over
   layers:
   - Default
   - TransparentFX

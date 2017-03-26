@@ -11,8 +11,9 @@ public class PlayerItems : MonoBehaviour
     private static int pointsForItem;
     private static int pointsForEnemy;
     private static int pointsForChest;
-
+    public GameObject game_over;
     public ScoreManager scoreManager;
+    private GameSounds gameSounds;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class PlayerItems : MonoBehaviour
         pointsForItem = 5;
         pointsForEnemy = 10;
         pointsForChest = 50;
+        gameSounds = GetComponent<GameSounds>();
     }
 
     void Update()
@@ -35,6 +37,7 @@ public class PlayerItems : MonoBehaviour
             scoreManager.AddPoints(pointsForItem);
             print("Spear count:" + spear);
             other.gameObject.SetActive(false);
+
         }
         else if (other.tag == "Ladder")
         {
@@ -48,8 +51,11 @@ public class PlayerItems : MonoBehaviour
         {
             if (spear <= 0)
             {
+                Time.timeScale = 0;
                 print("Game over...:");
-                SceneManager.LoadScene(0);
+                game_over.SetActive(true);
+                gameSounds.PlaySound(2);
+                //   SceneManager.LoadScene(0);
             }
             else
             {
@@ -63,8 +69,11 @@ public class PlayerItems : MonoBehaviour
         {
             if (ladder <= 0)
             {
+                Time.timeScale = 0;
                 print("Game over...:");
-                SceneManager.LoadScene(0);
+                game_over.SetActive(true);
+
+                //  SceneManager.LoadScene(0);
             }
             else
             {
@@ -72,6 +81,7 @@ public class PlayerItems : MonoBehaviour
                 print("Ladder count:" + ladder);
                 scoreManager.AddPoints(pointsForEnemy);
                 other.gameObject.SetActive(false);
+                gameSounds.PlaySound(2);
             }
         }
         else if (other.tag == "Chest")
