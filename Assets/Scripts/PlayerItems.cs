@@ -72,7 +72,7 @@ public class PlayerItems : MonoBehaviour
                 Time.timeScale = 0;
                 print("Game over...:");
                 game_over.SetActive(true);
-
+                gameSounds.PlaySound(2);
                 //  SceneManager.LoadScene(0);
             }
             else
@@ -81,13 +81,13 @@ public class PlayerItems : MonoBehaviour
                 print("Ladder count:" + ladder);
                 scoreManager.AddPoints(pointsForEnemy);
                 other.gameObject.SetActive(false);
-                gameSounds.PlaySound(2);
             }
         }
         else if (other.tag == "Chest")
         {
             scoreManager.AddPoints(pointsForChest);
             scoreManager.SaveCurrentPoints();
+            gameSounds.PlaySound(1);
             SceneManager.LoadScene(1);
         }
     }
