@@ -245,7 +245,44 @@ public class GridGenerator
         }
         #endregion
     }
-    
+
+    /// <summary>
+    /// Jono random algoritmas, nepabaigtas
+    /// </summary>
+    private void MazeGen_EllersAlgorithm()
+    {
+        #region
+        maze.Clear();
+        for (int x = 0; x < Grid.gridSize; x++)
+        {
+            List<Node> xNode = new List<Node>();
+            for (int y = 0; y < Grid.gridSize; y++)
+            {
+                Node yNode = new Node();
+                yNode.isWall = true;
+                yNode.pos = new Vector2(x, y);
+                if (y > 0)
+                {
+                    yNode.up = xNode[y - 1];
+                    xNode[y - 1].down = yNode;
+                }
+                if (x > 0)
+                {
+                    yNode.left = maze[x - 1][y];
+                    maze[x - 1][y].right = yNode;
+                }
+                xNode.Add(yNode);
+            }
+            maze.Add(xNode);
+        }
+        #endregion
+
+        System.Random r = new System.Random();
+
+        List<List<Node>> ellersMaze = new List<List<Node>>();
+
+    }
+
     #region Node
     public class Node
     {

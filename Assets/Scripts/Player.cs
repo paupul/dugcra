@@ -63,33 +63,35 @@ public class Player : MonoBehaviour
 
     public void AttemptMove(int xDir, int yDir)
     {
-        Vector2 end = rb2D.position + new Vector2(xDir, yDir);
-        RaycastHit2D fogDetect;
-        RaycastHit2D walldetect;
-
-
-        fogDetect = Physics2D.Linecast(rb2D.position, end, fog);
-        walldetect = Physics2D.Linecast(rb2D.position, end, wall); //nekeisti
-
-
-        WorldPos pos = EditTerrain.GetBlockPos(fogDetect);
-        //Debug.Log(pos.x + " " + pos.y);
-        if (fogDetect)
+        if (Time.timeScale == 1)
         {
-            fogWorld.SetTile(pos.x, pos.y, new GridTile(GridTile.TileTypes.Empty));
-            scoreManager.AddPoints(1);            
-        }
-        //if (fogDetect)
-        //{
-        //    GameObject.Find(fogDetect.transform.name).GetComponent<SpriteRenderer>().enabled = false;
-        //    print(fogDetect.transform.name);
-        //    GameObject.Find(fogDetect.transform.name).GetComponent<BoxCollider2D>().enabled = false;
-        //    Destroy(GameObject.Find(fogDetect.transform.name).GetComponent<GameObject>());
-        //}
-        if (!walldetect && !fogDetect)
-        {
-            gameSounds.PlaySound(0);
-            rb2D.MovePosition(end);
+            Vector2 end = rb2D.position + new Vector2(xDir, yDir);
+            RaycastHit2D fogDetect;
+            RaycastHit2D walldetect;
+
+            fogDetect = Physics2D.Linecast(rb2D.position, end, fog);
+            walldetect = Physics2D.Linecast(rb2D.position, end, wall); //nekeisti
+
+            WorldPos pos = EditTerrain.GetBlockPos(fogDetect);
+            //Debug.Log(pos.x + " " + pos.y);
+
+            if (fogDetect)
+            {
+                fogWorld.SetTile(pos.x, pos.y, new GridTile(GridTile.TileTypes.Empty));
+                scoreManager.AddPoints(1);
+            }
+            //if (fogDetect)
+            //{
+            //    GameObject.Find(fogDetect.transform.name).GetComponent<SpriteRenderer>().enabled = false;
+            //    print(fogDetect.transform.name);
+            //    GameObject.Find(fogDetect.transform.name).GetComponent<BoxCollider2D>().enabled = false;
+            //    Destroy(GameObject.Find(fogDetect.transform.name).GetComponent<GameObject>());
+            //}
+            if (!walldetect && !fogDetect)
+            {
+                gameSounds.PlaySound(0);
+                rb2D.MovePosition(end);
+            }
         }
         StartCoroutine(Delay());
     }
