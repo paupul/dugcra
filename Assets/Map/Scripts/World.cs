@@ -8,6 +8,7 @@ public class World : MonoBehaviour {
     public Dictionary<WorldPos, Grid> grids = new Dictionary<WorldPos, Grid>();
     public GameObject gridPrefab;
     public bool isFogGenerator = false;
+    public bool isRandom = false;
 
     public WorldPos startingPoint;
     public WorldPos startingGrid;
@@ -35,7 +36,7 @@ public class World : MonoBehaviour {
 
         newGrid.pos = worldPos;
         newGrid.world = this;
-        if (isFogGenerator || !SaveAndLoadManager.LoadGrid(newGrid))
+        if (isFogGenerator || isRandom || !SaveAndLoadManager.LoadGrid(newGrid))
         {
             newGrid = gen.GridGen(newGrid, out isPointGenerated, out startingGrid, out startingPoint, isFogGenerator);
         }

@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
 
-	// Use this for initialization
+    public GameObject worldPrefab;
+    public GameObject fogPrefab;
+    public GameObject playerPrefab;
+    public string levelName;
+    public bool isRandom;
+
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        if (isRandom)
+        {
+            GameObject world = Instantiate(worldPrefab);
+            GameObject fog = Instantiate(fogPrefab);
+            GameObject player = Instantiate(playerPrefab);
+        }
+	}	
 }

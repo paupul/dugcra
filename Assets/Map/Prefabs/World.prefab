@@ -54,7 +54,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPrefab: {fileID: 1628037296534738, guid: 24130fc2fa1cfa746be68b28ec7dc22c, type: 2}
   isFogGenerator: 0
+  isRandom: 0
   startingPoint:
+    x: 0
+    y: 0
+  startingGrid:
     x: 0
     y: 0
   isPointGenerated: 0

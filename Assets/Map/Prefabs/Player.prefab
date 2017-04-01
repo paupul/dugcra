@@ -24,12 +24,13 @@ GameObject:
   - component: {fileID: 61015847816246172}
   - component: {fileID: 82242708074355814}
   - component: {fileID: 114807387371039576}
-  - component: {fileID: 114551446355491356}
   - component: {fileID: 114203851841997464}
   - component: {fileID: 114008798203296496}
   - component: {fileID: 114375879098681640}
+  - component: {fileID: 114277626278625630}
+  - component: {fileID: 114029288404148496}
   m_Layer: 2
-  m_Name: New Sprite
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,7 +175,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game_over: {fileID: 0}
+  next_level: {fileID: 0}
   scoreManager: {fileID: 114807387371039576}
+  game_over_text: {fileID: 0}
+--- !u!114 &114029288404148496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1285532990844738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a35fce687607cf41a45c23700b919a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryPanel: {fileID: 0}
+  inventoryIcons:
+  - {fileID: 1654861731155930, guid: 6b751ee55865f344c99fa562daa7d100, type: 2}
+  - {fileID: 1376460871125830, guid: 1fdb6586d1f1cdb408fbe0be93e07ebc, type: 2}
 --- !u!114 &114203851841997464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,6 +214,24 @@ MonoBehaviour:
   fogWorld: {fileID: 0}
   world: {fileID: 0}
   scoreManager: {fileID: 114807387371039576}
+--- !u!114 &114277626278625630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1285532990844738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27aebdd4c7a590c4b87b0c6609dc286e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: cea544d3e61604c43bd18eda5ecdeec5, type: 3}
+  - {fileID: 8300000, guid: edd653d1179725e43bbba6fea1f7ae40, type: 3}
+  - {fileID: 8300000, guid: 2f70a15052d8bf64386a0ccf5324974e, type: 3}
+  - {fileID: 8300000, guid: 143215f276fb2b1428091f4b0876bbce, type: 3}
+  - {fileID: 8300000, guid: 2e7c18455fe08ad4b8c4a79c6e15d9bf, type: 3}
+  - {fileID: 8300000, guid: 2f70a15052d8bf64386a0ccf5324974e, type: 3}
 --- !u!114 &114375879098681640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -211,21 +247,6 @@ MonoBehaviour:
   inventoryIcons:
   - {fileID: 1654861731155930, guid: 6b751ee55865f344c99fa562daa7d100, type: 2}
   - {fileID: 1376460871125830, guid: 1fdb6586d1f1cdb408fbe0be93e07ebc, type: 2}
---- !u!114 &114551446355491356
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1285532990844738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27aebdd4c7a590c4b87b0c6609dc286e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioClips:
-  - {fileID: 8300000, guid: cea544d3e61604c43bd18eda5ecdeec5, type: 3}
-  - {fileID: 8300000, guid: 143215f276fb2b1428091f4b0876bbce, type: 3}
-  - {fileID: 8300000, guid: 2f70a15052d8bf64386a0ccf5324974e, type: 3}
 --- !u!114 &114807387371039576
 MonoBehaviour:
   m_ObjectHideFlags: 1
