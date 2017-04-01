@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerItems : MonoBehaviour
 {
@@ -12,8 +13,10 @@ public class PlayerItems : MonoBehaviour
     private static int pointsForEnemy;
     private static int pointsForChest;
     public GameObject game_over;
+    public GameObject next_level;
     public ScoreManager scoreManager;
     private GameSounds gameSounds;
+    public Text game_over_text;
 
     void Start()
     {
@@ -33,6 +36,7 @@ public class PlayerItems : MonoBehaviour
     {
         if (other.tag == "Spear")
         {
+            gameSounds.PlaySound(4);
             spear++;
             scoreManager.AddPoints(pointsForItem);
             print("Spear count:" + spear);
@@ -41,6 +45,7 @@ public class PlayerItems : MonoBehaviour
         }
         else if (other.tag == "Ladder")
         {
+            gameSounds.PlaySound(4);
             ladder++;
             scoreManager.AddPoints(pointsForItem);
             print("Ladder count:" + ladder);
@@ -52,6 +57,7 @@ public class PlayerItems : MonoBehaviour
             if (spear <= 0)
             {
                 Time.timeScale = 0;
+                game_over_text.text = "You got butchered by the monster.";
                 print("Game over...:");
                 game_over.SetActive(true);
                 gameSounds.PlaySound(2);
@@ -70,9 +76,11 @@ public class PlayerItems : MonoBehaviour
             if (ladder <= 0)
             {
                 Time.timeScale = 0;
+                game_over_text.text = "You died in agony inside a pit.";
                 print("Game over...:");
                 game_over.SetActive(true);
                 gameSounds.PlaySound(2);
+                gameSounds.PlaySound(5);
                 //  SceneManager.LoadScene(0);
             }
             else
@@ -87,8 +95,9 @@ public class PlayerItems : MonoBehaviour
         {
             scoreManager.AddPoints(pointsForChest);
             scoreManager.SaveCurrentPoints();
-            gameSounds.PlaySound(1);
-            SceneManager.LoadScene(1);
+            Time.timeScale = 0;
+            gameSounds.PlaySound(3);
+            next_level.SetActive(true);
         }
     }
 }

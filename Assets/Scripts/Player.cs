@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
 
     public ScoreManager scoreManager;
     private GameSounds gameSounds;
+    private System.Random rnd;
 
     protected void Start()
     {
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
         idle = true;
         rb2D = GetComponent<Rigidbody2D>();
         gameSounds = GetComponent<GameSounds>();
+        rnd = new System.Random();
     }
 
     void Update()
@@ -89,7 +91,7 @@ public class Player : MonoBehaviour
             //}
             if (!walldetect && !fogDetect)
             {
-                gameSounds.PlaySound(0);
+                gameSounds.PlaySound(rnd.Next(0, 2));
                 rb2D.MovePosition(end);
             }
         }
