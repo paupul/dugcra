@@ -32,5 +32,10 @@ public struct WorldPos
             return hash;
         }
     }
+
+    public override string ToString()
+    {
+        return "{" + x + " " + y + "}";
+    }
 }
 

@@ -9,10 +9,11 @@ public class GridGenerator
     List<List<Node>> maze = new List<List<Node>>();
 
 
-    public Grid GridGen(Grid grid, out bool isPointGenerated, out WorldPos startingPoint, bool isFogGenerator = false)
+    public Grid GridGen(Grid grid, out bool isPointGenerated, out WorldPos startingGrid, out WorldPos startingPoint, bool isFogGenerator = false)
     {
         isPointGenerated = false;
         startingPoint = new WorldPos(0, 0);
+        startingGrid = new WorldPos(0, 0);
 
         if (isFogGenerator)
         {
@@ -31,17 +32,83 @@ public class GridGenerator
             {
                 for (int y = grid.pos.y; y < grid.pos.y + Grid.gridSize; y++)
                 {
-                    if (maze[x][y].isWall)
+                    int xx = x;
+                    int yy = y;
+                    if (x < 0)
+                    {
+                        xx *= -1;
+                        xx--;
+                    }
+                    if (y < 0)
+                    {
+                        yy *= -1;
+                        yy--;
+                    }
+                    if (maze[xx % 16][yy % 16].isWall)
                     {
                         grid = GridTileGen(grid, x, y, GridTile.TileTypes.Wall);
                     }
                     else grid = GridTileGen(grid, x, y, GridTile.TileTypes.Ground);
-                    if (maze[x][y].isStart)
+                    if (maze[xx % 16][yy % 16].isStart)
                     {
-                        startingPoint = new WorldPos(x, y);
+                        startingPoint = new WorldPos(x - grid.pos.x, y - grid.pos.y);
+                        startingGrid = new WorldPos(x, y);
                         isPointGenerated = true;
                     }
                 }
+            }
+        }
+        return grid;
+    }
+
+    /// <summary>
+    /// Sujungimu versija v2
+    /// </summary>
+    /// <param name="grid">Grid</param>
+    /// <returns>Grid</returns>
+    public Grid GridConnectionGen(Grid grid)
+    {
+        Grid g;
+        System.Random r = new System.Random();
+        List<int> positions = new List<int>();
+        if (g = grid.world.GetGrid(grid.pos.x, grid.pos.y - Grid.gridSize))
+        {
+            for (int x = grid.pos.x + 1; x < grid.pos.x + Grid.gridSize - 1; x++)
+            {
+                if (grid.GetTile(x - grid.pos.x, 1).type == GridTile.TileTypes.Ground
+                    && g.GetTile(x - g.pos.x, 14).type == GridTile.TileTypes.Ground)
+                {
+                    positions.Add(x);
+                }
+            }
+
+            for (int i = positions.Count; i > 0; i = positions.Count / 2)
+            {
+                int rand = r.Next(0, positions.Count);
+                grid = GridTileGen(grid, positions[rand], 0 + grid.pos.y, GridTile.TileTypes.Ground);
+                g = GridTileGen(g, positions[rand], 15 + g.pos.y, GridTile.TileTypes.Ground);
+                g.update = true;
+                positions.RemoveAt(rand);
+            }
+        }
+        positions.Clear();
+        if (g = grid.world.GetGrid(grid.pos.x - Grid.gridSize, grid.pos.y))
+        {
+            for (int y = grid.pos.y + 1; y < grid.pos.y + Grid.gridSize - 1; y++)
+            {
+                if (grid.GetTile(1, y - grid.pos.y).type == GridTile.TileTypes.Ground
+                       && g.GetTile(14, y - g.pos.y).type == GridTile.TileTypes.Ground)
+                {
+                    positions.Add(y);
+                }
+            }
+            for (int i = positions.Count; i > 0; i = positions.Count / 2)
+            {
+                int rand = r.Next(0, positions.Count);
+                grid = GridTileGen(grid, 0 + grid.pos.x, positions[rand], GridTile.TileTypes.Ground);
+                g = GridTileGen(g, 15 + g.pos.x, positions[rand], GridTile.TileTypes.Ground);
+                g.update = true;
+                positions.RemoveAt(rand);
             }
         }
         return grid;
@@ -106,7 +173,7 @@ public class GridGenerator
 
         System.Random r = new System.Random();
 
-        Node current = maze[(int)(r.NextDouble() * Grid.gridSize * 10) % Grid.gridSize][(int)(r.NextDouble() * Grid.gridSize * 10) % Grid.gridSize];
+        Node current = maze[r.Next(3, Grid.gridSize - 3)][r.Next(3, Grid.gridSize - 3)];
         current.isStart = true;
         current.isWall = false;
 

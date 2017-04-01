@@ -15,9 +15,9 @@ public class LoadGrids : MonoBehaviour
 
     void Start()
     {
-        for (int x = 0; x <= 0; x++)
+        for (int x = -1; x <= 1; x++)
         {
-            for (int y = 0; y <= 0; y++)
+            for (int y = -1; y <= 1; y++)
             {
                 gridPositions.Add(new WorldPos(x, y));
             }

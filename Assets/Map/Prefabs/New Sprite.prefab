@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114551446355491356}
   - component: {fileID: 114203851841997464}
   - component: {fileID: 114008798203296496}
+  - component: {fileID: 114375879098681640}
   m_Layer: 2
   m_Name: New Sprite
   m_TagString: Untagged
@@ -172,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722717478f3d2a6408aaf591ea7da752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  game_over: {fileID: 0}
   scoreManager: {fileID: 114807387371039576}
 --- !u!114 &114203851841997464
 MonoBehaviour:
@@ -184,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58cd0a34519d5747905ae44e7db4359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnDelay: 0.25
+  turnDelay: 0.15
   fog:
     serializedVersion: 2
     m_Bits: 256
@@ -194,6 +196,21 @@ MonoBehaviour:
   fogWorld: {fileID: 0}
   world: {fileID: 0}
   scoreManager: {fileID: 114807387371039576}
+--- !u!114 &114375879098681640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1285532990844738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a35fce687607cf41a45c23700b919a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryPanel: {fileID: 0}
+  inventoryIcons:
+  - {fileID: 1654861731155930, guid: 6b751ee55865f344c99fa562daa7d100, type: 2}
+  - {fileID: 1376460871125830, guid: 1fdb6586d1f1cdb408fbe0be93e07ebc, type: 2}
 --- !u!114 &114551446355491356
 MonoBehaviour:
   m_ObjectHideFlags: 1

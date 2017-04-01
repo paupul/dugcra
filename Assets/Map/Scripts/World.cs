@@ -10,6 +10,7 @@ public class World : MonoBehaviour {
     public bool isFogGenerator = false;
 
     public WorldPos startingPoint;
+    public WorldPos startingGrid;
     public bool isPointGenerated = false;
 
     public string worldName = "World";
@@ -36,11 +37,12 @@ public class World : MonoBehaviour {
         newGrid.world = this;
         if (isFogGenerator || !SaveAndLoadManager.LoadGrid(newGrid))
         {
-            newGrid = gen.GridGen(newGrid, out isPointGenerated, out startingPoint, isFogGenerator);
+            newGrid = gen.GridGen(newGrid, out isPointGenerated, out startingGrid, out startingPoint, isFogGenerator);
         }
 
         //newGrid = gen.GridTileGen(newGrid, startingPoint.x, startingPoint.y, GridTile.TileTypes.Empty);
-        
+        newGrid = gen.GridConnectionGen(newGrid);
+
         grids.Add(worldPos, newGrid);        
     }
 

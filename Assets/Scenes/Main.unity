@@ -6008,6 +6008,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114008798203296496, guid: 624ac1cf12bbb0144a400585172ccdfe,
+        type: 2}
+      propertyPath: game_over
+      value: 
+      objectReference: {fileID: 1162927359}
+    - target: {fileID: 114807387371039576, guid: 624ac1cf12bbb0144a400585172ccdfe,
+        type: 2}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 1493866041}
     - target: {fileID: 114203851841997464, guid: 624ac1cf12bbb0144a400585172ccdfe,
         type: 2}
       propertyPath: fogWorld
@@ -6018,20 +6028,19 @@ Prefab:
       propertyPath: world
       value: 
       objectReference: {fileID: 1344301039}
-    - target: {fileID: 114807387371039576, guid: 624ac1cf12bbb0144a400585172ccdfe,
-        type: 2}
-      propertyPath: scoreText
-      value: 
-      objectReference: {fileID: 1493866041}
     - target: {fileID: 1285532990844738, guid: 624ac1cf12bbb0144a400585172ccdfe, type: 2}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 114008798203296496, guid: 624ac1cf12bbb0144a400585172ccdfe,
+    - target: {fileID: 114375879098681640, guid: 624ac1cf12bbb0144a400585172ccdfe,
         type: 2}
-      propertyPath: game_over
+      propertyPath: inventoryPanel
       value: 
-      objectReference: {fileID: 1162927359}
+      objectReference: {fileID: 667636705}
+    - target: {fileID: 1285532990844738, guid: 624ac1cf12bbb0144a400585172ccdfe, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 624ac1cf12bbb0144a400585172ccdfe, type: 2}
   m_IsPrefabParent: 0
@@ -6784,26 +6793,6 @@ SpriteRenderer:
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!1 &1855892935 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1285532990844738, guid: 624ac1cf12bbb0144a400585172ccdfe,
-    type: 2}
-  m_PrefabInternal: {fileID: 1706980133}
---- !u!114 &1855892944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1855892935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a35fce687607cf41a45c23700b919a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryPanel: {fileID: 667636705}
-  inventoryIcons:
-  - {fileID: 1654861731155930, guid: 6b751ee55865f344c99fa562daa7d100, type: 2}
-  - {fileID: 1376460871125830, guid: 1fdb6586d1f1cdb408fbe0be93e07ebc, type: 2}
 --- !u!1001 &1861589494
 Prefab:
   m_ObjectHideFlags: 0
