@@ -66,6 +66,7 @@ public class PlayerItems : MonoBehaviour
             else
             {
                 spear--;
+                gameSounds.PlaySound(5);
                 print("Spear count:" + spear);
                 scoreManager.AddPoints(pointsForEnemy);
                 other.gameObject.SetActive(false);
@@ -80,12 +81,12 @@ public class PlayerItems : MonoBehaviour
                 print("Game over...:");
                 game_over.SetActive(true);
                 gameSounds.PlaySound(2);
-                gameSounds.PlaySound(5);
                 //  SceneManager.LoadScene(0);
             }
             else
             {
                 ladder--;
+                gameSounds.PlaySound(5);
                 print("Ladder count:" + ladder);
                 scoreManager.AddPoints(pointsForEnemy);
                 other.gameObject.SetActive(false);
