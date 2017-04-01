@@ -17,11 +17,11 @@ public static class SaveAndLoadManager
 
     public static string windowsSaveLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-    public static string gridSaveFolder = "Saves";
+    public static string gridSaveFolder = "Levels";
 
-    public static string SaveLocation(string name)
+    public static string SaveLocation(string name, string worldName = "world")
     {
-        string saveLocation = gridSaveFolder + "/";
+        string saveLocation = gridSaveFolder + "/" + worldName + "/";
 
         if (!Directory.Exists(saveLocation))
         {
@@ -65,7 +65,7 @@ public static class SaveAndLoadManager
         }
         save.ToArray(t);
 
-        File.WriteAllText(SaveLocation(grid.ToString()), save.saveToString(savePacked));
+        File.WriteAllText(SaveLocation(grid.ToString(), grid.world.worldName), save.saveToString(savePacked));
     }
 
     public static bool LoadGrid(Grid grid)
@@ -75,7 +75,7 @@ public static class SaveAndLoadManager
             return false;
         }
 
-        Stream file = new FileStream(SaveLocation(grid.ToString()), FileMode.Open);
+        Stream file = new FileStream(SaveLocation(grid.ToString(), grid.world.worldName), FileMode.Open);
         StreamReader text = new StreamReader(file);
         string t = text.ReadToEnd();
         file.Close();

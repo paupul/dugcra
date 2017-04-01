@@ -51,8 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a2058ba6ef6684ebfb130b51f2fcc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldPrefab: {fileID: 0}
+  worldPrefab: {fileID: 1187776398774674, guid: dcc082b13f44f3f4d9aa664fa3dbae3f,
+    type: 2}
   fogPrefab: {fileID: 1180964626356768, guid: 29162dcd4a39ee242b7c5f76a3188e76, type: 2}
-  playerPrefab: {fileID: 0}
+  playerPrefab: {fileID: 1285532990844738, guid: 624ac1cf12bbb0144a400585172ccdfe,
+    type: 2}
   levelName: 
   isRandom: 1
