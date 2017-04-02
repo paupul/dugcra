@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         gameSounds = GetComponent<GameSounds>();
         rnd = new System.Random();
+        Time.timeScale = 1;
     }
 
     void Update()
