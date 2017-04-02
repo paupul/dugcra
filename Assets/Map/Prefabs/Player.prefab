@@ -241,10 +241,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722717478f3d2a6408aaf591ea7da752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game_over: {fileID: 0}
-  next_level: {fileID: 0}
+  game_over: {fileID: 1461440865974518, guid: 6f886a6d0851fc84bb9f9f97548ace6e, type: 2}
+  next_level: {fileID: 1443456791792186, guid: a6433ab4f3f83ca4fa8d62e810cc80c3, type: 2}
   scoreManager: {fileID: 114807387371039576}
-  game_over_text: {fileID: 0}
+  game_over_text: {fileID: 114517909852725576, guid: 666dab042f308684c9153873c28d9b63,
+    type: 2}
 --- !u!114 &114029288404148496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -372,7 +373,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f62c233d50af7864c8e22cf643ff6cc4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5eb7fa9b236633340a2143e0e0613db7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -391,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -511,8 +512,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 14, y: -150.25}
-  m_SizeDelta: {x: -352, y: -299.5}
+  m_AnchoredPosition: {x: 0, y: -170}
+  m_SizeDelta: {x: -560, y: -390}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224738487084760838
 RectTransform:

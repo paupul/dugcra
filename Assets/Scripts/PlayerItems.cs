@@ -56,11 +56,12 @@ public class PlayerItems : MonoBehaviour
         {
             if (spear <= 0)
             {
-                Time.timeScale = 0;
+                
                 game_over_text.text = "You got butchered by the monster.";
                 print("Game over...:");
                 game_over.SetActive(true);
                 gameSounds.PlaySound(2);
+                Time.timeScale = 0;
                 //   SceneManager.LoadScene(0);
             }
             else
