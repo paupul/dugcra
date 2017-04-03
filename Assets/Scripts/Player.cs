@@ -17,6 +17,10 @@ public class Player : MonoBehaviour
     private int vertical;
     private bool loaded;
 
+    public GameObject pauseMenu;
+    public GameObject map;
+    public bool isPaused = false;
+
     public ScoreManager scoreManager;
     private GameSounds gameSounds;
     private System.Random rnd;
@@ -61,7 +65,30 @@ public class Player : MonoBehaviour
             AttemptMove(horizontal, vertical);
 
         }
+        if (Input.GetKeyDown(KeyCode.Escape)
+            && !map.activeInHierarchy
+            )
+        {
+            isPaused = !isPaused;
+            Pause_action(isPaused);
+            pauseMenu.SetActive(isPaused);
+        }
 
+    }
+    public void Pause_action(bool pause = false)
+    {
+        if (!pause)
+        {
+            Time.timeScale = 1;
+        }
+        else
+        {
+            Time.timeScale = 0;
+        }
+    }
+    public void Quit()
+    {
+        Application.Quit();
     }
 
     public void AttemptMove(int xDir, int yDir)

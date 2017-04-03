@@ -34,20 +34,16 @@ public class pickup : MonoBehaviour {
             {
                 if (child.gameObject.tag == "Ladder")
                 {
-
                     string c = child.Find("Text").GetComponent<Text>().text;
                     int tcount = System.Int32.Parse(c) - 1;
                     child.Find("Text").GetComponent<Text>().text = "" + tcount;
                     return;
                 }
             }
-
-
-
         }
 
         GameObject i;
-        
+                
         if(collision.tag == "Ladder")
         {
             i = Instantiate(inventoryIcons[0]);

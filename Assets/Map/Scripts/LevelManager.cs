@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour
         }
         playerComp.fogWorld = fog.GetComponent<World>();
         playerComp.fogWorld.isFogGenerator = true;
+        //playerComp.map = Camera.main.gameObject;
 
         Camera.main.GetComponent<SmoothCamera>().Lookat = player.transform;
     }

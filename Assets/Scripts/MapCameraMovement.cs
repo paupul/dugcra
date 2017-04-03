@@ -16,7 +16,7 @@ public class MapCameraMovement : MonoBehaviour {
             float mouseY = -Input.GetAxis("Mouse Y");
             float cameraX = transform.position.x+ mouseX;
             float cameraY = transform.position.y+ mouseY;
-            if ((cameraX>=6&&cameraX<=10) &&(cameraY>=4&&cameraY<=12))
+            if ((cameraX>=-15&&cameraX<=40) &&(cameraY>=-10&&cameraY<=45))
             {
                 Vector3 endPosition = new Vector3(mouseX, mouseY);
                 transform.position = Vector3.Lerp(transform.position, transform.position + endPosition, 0.5f);
