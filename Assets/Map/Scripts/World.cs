@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class World : MonoBehaviour {
+public class World : MonoBehaviour
+{
 
     public Dictionary<WorldPos, Grid> grids = new Dictionary<WorldPos, Grid>();
     public GameObject gridPrefab;
@@ -13,6 +14,7 @@ public class World : MonoBehaviour {
     public WorldPos startingPoint;
     public WorldPos startingGrid;
     public bool isPointGenerated = false;
+    public LevelManager levelManager;
 
     public string worldName = "World";
 
@@ -30,6 +32,7 @@ public class World : MonoBehaviour {
         {
             newGridObject.layer = 9;
         }
+        newGridObject.transform.SetParent(gameObject.transform);
         Grid newGrid = newGridObject.GetComponent<Grid>();
 
         GridGenerator gen = new GridGenerator();
@@ -44,7 +47,14 @@ public class World : MonoBehaviour {
         //newGrid = gen.GridTileGen(newGrid, startingPoint.x, startingPoint.y, GridTile.TileTypes.Empty);
         newGrid = gen.GridConnectionGen(newGrid);
 
-        grids.Add(worldPos, newGrid);        
+        newGrid = gen.GridItemGen(newGrid);
+
+        if (!isFogGenerator)
+        {
+            levelManager.Spawn(newGrid);
+        }
+
+        grids.Add(worldPos, newGrid);
     }
 
     public Grid GetGrid(int x, int y)
@@ -54,7 +64,7 @@ public class World : MonoBehaviour {
         pos.x = Mathf.FloorToInt(x / multiple) * Grid.gridSize;
         pos.y = Mathf.FloorToInt(y / multiple) * Grid.gridSize;
 
-        Grid containerGrid= null;
+        Grid containerGrid = null;
 
         grids.TryGetValue(pos, out containerGrid);
 

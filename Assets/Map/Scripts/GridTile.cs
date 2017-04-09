@@ -15,6 +15,8 @@ public class GridTile
     public TileTypes[] adjTiles = new TileTypes[4];
     [NonSerialized]
     public TileTypes[] diagTiles = new TileTypes[4];
+    public enum ContainedObject { Empty, Ladder, Pit, Spear, Enemy, Chest }
+    public ContainedObject containedObject = ContainedObject.Empty;
     //  0 /0 1
     // /1   /2
     //  2 /3 3

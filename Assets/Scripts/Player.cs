@@ -65,15 +65,19 @@ public class Player : MonoBehaviour
             AttemptMove(horizontal, vertical);
 
         }
-        if (Input.GetKeyDown(KeyCode.Escape)
-            && !map.activeInHierarchy
-            )
+        if (Input.GetKeyDown(KeyCode.Escape) && !map.activeInHierarchy)
         {
             isPaused = !isPaused;
             Pause_action(isPaused);
             pauseMenu.SetActive(isPaused);
         }
-
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            foreach (var item in fogWorld.grids)
+            {
+                item.Value.clear = true;
+            }           
+        }
     }
     public void Pause_action(bool pause = false)
     {

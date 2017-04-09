@@ -143,6 +143,150 @@ public class GridGenerator
         return grid;
     }
 
+    public Grid GridItemGen(Grid grid)
+    {
+        List<GridTile.ContainedObject> chosenObjects = new List<GridTile.ContainedObject>();
+        GridToMaze(grid);
+        for (int x = 0; x < Grid.gridSize; x++)
+        {
+            for (int y = 0; y < Grid.gridSize; y++)
+            {
+                if (maze[x][y].isWall == false && maze[x][y].up != null && maze[x][y].down != null && maze[x][y].right != null && maze[x][y].left != null)
+                {
+                    if (maze[x][y].up.isWall == true && maze[x][y].down.isWall == true && maze[x][y].right.isWall == true && maze[x][y].left.isWall == false)
+                    {
+                        switch (chosenObjects.LastOrDefault())
+                        {
+                            case GridTile.ContainedObject.Ladder:
+                                chosenObjects.Add(GridTile.ContainedObject.Spear);
+                                grid.tiles[x, y].containedObject = GridTile.ContainedObject.Spear;
+                                grid.tiles[x - 1, y].containedObject = GridTile.ContainedObject.Pit;
+                                break;
+                            case GridTile.ContainedObject.Spear:
+                                chosenObjects.Add(GridTile.ContainedObject.Chest);
+                                grid.tiles[x, y].containedObject = GridTile.ContainedObject.Chest;
+                                grid.tiles[x - 1, y].containedObject = GridTile.ContainedObject.Enemy;
+                                break;
+                            default:
+                                chosenObjects.Add(GridTile.ContainedObject.Ladder);
+                                grid.tiles[x, y].containedObject = GridTile.ContainedObject.Ladder;
+                                break;
+                        }
+                    }
+                    else if (maze[x][y].up.isWall == true && maze[x][y].down.isWall == true && maze[x][y].right.isWall == false && maze[x][y].left.isWall == true)
+                    {
+                        switch (chosenObjects.LastOrDefault())
+                        {
+                            case GridTile.ContainedObject.Ladder:
+                                chosenObjects.Add(GridTile.ContainedObject.Spear);
+                                grid.tiles[x, y].containedObject = GridTile.ContainedObject.Spear;
+                                grid.tiles[x + 1, y].containedObject = GridTile.ContainedObject.Pit;
+                                break;
+                            case GridTile.ContainedObject.Spear:
+                                chosenObjects.Add(GridTile.ContainedObject.Chest);
+                                grid.tiles[x, y].containedObject = GridTile.ContainedObject.Chest;
+                                grid.tiles[x + 1, y].containedObject = GridTile.ContainedObject.Enemy;
+                                break;
+                            default:
+                                chosenObjects.Add(GridTile.ContainedObject.Ladder);
+                                grid.tiles[x, y].containedObject = GridTile.ContainedObject.Ladder;
+                                break;
+                        }
+                    }
+                    else if (maze[x][y].up.isWall == true && maze[x][y].down.isWall == false && maze[x][y].right.isWall == true && maze[x][y].left.isWall == true)
+                    {
+                        switch (chosenObjects.LastOrDefault())
+                        {
+                            case GridTile.ContainedObject.Ladder:
+                                chosenObjects.Add(GridTile.ContainedObject.Spear);
+                                grid.tiles[x, y].containedObject = GridTile.ContainedObject.Spear;
+                                grid.tiles[x, y + 1].containedObject = GridTile.ContainedObject.Pit;
+                                break;
+                            case GridTile.ContainedObject.Spear:
+                                chosenObjects.Add(GridTile.ContainedObject.Chest);
+                                grid.tiles[x, y].containedObject = GridTile.ContainedObject.Chest;
+                                grid.tiles[x, y + 1].containedObject = GridTile.ContainedObject.Enemy;
+                                break;
+                            default:
+                                chosenObjects.Add(GridTile.ContainedObject.Ladder);
+                                grid.tiles[x, y].containedObject = GridTile.ContainedObject.Ladder;
+                                break;
+                        }
+                    }
+                    else if (maze[x][y].up.isWall == false && maze[x][y].down.isWall == true && maze[x][y].right.isWall == true && maze[x][y].left.isWall == true)
+                    {
+                        switch (chosenObjects.LastOrDefault())
+                        {
+                            case GridTile.ContainedObject.Ladder:
+                                chosenObjects.Add(GridTile.ContainedObject.Spear);
+                                grid.tiles[x, y].containedObject = GridTile.ContainedObject.Spear;
+                                grid.tiles[x, y - 1].containedObject = GridTile.ContainedObject.Pit;
+                                break;
+                            case GridTile.ContainedObject.Spear:
+                                chosenObjects.Add(GridTile.ContainedObject.Chest);
+                                grid.tiles[x, y].containedObject = GridTile.ContainedObject.Chest;
+                                grid.tiles[x, y - 1].containedObject = GridTile.ContainedObject.Enemy;
+                                break;
+                            default:
+                                chosenObjects.Add(GridTile.ContainedObject.Ladder);
+                                grid.tiles[x, y].containedObject = GridTile.ContainedObject.Ladder;
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+        return grid;
+    }
+
+    /// <summary>
+    /// Konvertuoja i labirinto formata
+    /// </summary>
+    /// <param name="grid"></param>
+    private void GridToMaze(Grid grid)
+    {
+        #region Maze setup
+        maze.Clear();
+        for (int x = 0; x < Grid.gridSize; x++)
+        {
+            List<Node> xNode = new List<Node>();
+            for (int y = 0; y < Grid.gridSize; y++)
+            {
+                Node yNode = new Node();
+                yNode.isWall = true;
+                yNode.pos = new Vector2(x, y);
+                if (y > 0)
+                {
+                    yNode.up = xNode[y - 1];
+                    xNode[y - 1].down = yNode;
+                }
+                if (x > 0)
+                {
+                    yNode.left = maze[x - 1][y];
+                    maze[x - 1][y].right = yNode;
+                }
+                xNode.Add(yNode);
+            }
+            maze.Add(xNode);
+        }
+        #endregion
+
+        for (int x = 0; x < Grid.gridSize; x++)
+        {
+            for (int y = 0; y < Grid.gridSize; y++)
+            {
+                if (grid.GetTile(x, y).type == GridTile.TileTypes.Wall)
+                {
+                    maze[x][y].isWall = true;
+                }
+                else if (grid.GetTile(x, y).type == GridTile.TileTypes.Ground)
+                {
+                    maze[x][y].isWall = false;
+                }
+            }
+        }
+    }
+
     private void MazeGen2()
     {
         #region
@@ -188,7 +332,7 @@ public class GridGenerator
             }
         }
 
-        int startingBranches = r.Next(1, count + 1);
+        int startingBranches = r.Next(3, count + 1);
 
         #region
         if (startingBranches == count)
@@ -234,7 +378,7 @@ public class GridGenerator
                 }
             }
         }
-        
+
 
         while (validNodes.Count > 0)
         {
@@ -242,14 +386,14 @@ public class GridGenerator
 
             List<Node> readyNeighbours = new List<Node>();
 
-            if (validNodes[rand_node][0] != null && validNodes[rand_node][0].isWall 
+            if (validNodes[rand_node][0] != null && validNodes[rand_node][0].isWall
                 && validNodes[rand_node][0].left != null && validNodes[rand_node][0].right != null
                 && validNodes[rand_node][0].left.isWall && validNodes[rand_node][0].right.isWall
                 && validNodes[rand_node][0].up != null && validNodes[rand_node][0].up.isWall)
             {
                 readyNeighbours.Add(validNodes[rand_node][0]);
             }
-            if (validNodes[rand_node][1] != null && validNodes[rand_node][1].isWall 
+            if (validNodes[rand_node][1] != null && validNodes[rand_node][1].isWall
                 && validNodes[rand_node][1].up != null && validNodes[rand_node][1].down != null
                 && validNodes[rand_node][1].up.isWall && validNodes[rand_node][1].down.isWall
                 && validNodes[rand_node][1].right != null && validNodes[rand_node][1].right.isWall)
@@ -263,9 +407,9 @@ public class GridGenerator
             {
                 readyNeighbours.Add(validNodes[rand_node][2]);
             }
-            if (validNodes[rand_node][3] != null && validNodes[rand_node][3].isWall 
+            if (validNodes[rand_node][3] != null && validNodes[rand_node][3].isWall
                 && validNodes[rand_node][3].up != null && validNodes[rand_node][3].down != null
-                && validNodes[rand_node][3].up.isWall && validNodes[rand_node][3].down.isWall 
+                && validNodes[rand_node][3].up.isWall && validNodes[rand_node][3].down.isWall
                 && validNodes[rand_node][3].left != null && validNodes[rand_node][3].left.isWall)
             {
                 readyNeighbours.Add(validNodes[rand_node][3]);
@@ -284,7 +428,7 @@ public class GridGenerator
                 readyNeighbours[rand].isWall = false;
                 validNodes.Add(readyNeighbours[rand]);
                 if (rand != rand2)
-                { 
+                {
                     readyNeighbours[rand2].isWall = false;
                     validNodes.Add(readyNeighbours[rand2]);
                 }

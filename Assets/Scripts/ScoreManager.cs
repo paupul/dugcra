@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour {
 
     public static int highscore;
 
-    public GUIText scoreText;
+    public Text scoreText;
 
     void Start()
     {
@@ -20,7 +20,6 @@ public class ScoreManager : MonoBehaviour {
         PlayerPrefs.SetInt("score", 0);
 
         highscore = PlayerPrefs.GetInt("highscore", highscore);
-        //print("Points count:" + score);
     }
     void Update()
     {
@@ -35,8 +34,6 @@ public class ScoreManager : MonoBehaviour {
     {
         score += pointsToAdd;
         scoreText.text = "Score: " + score;
-        //print("Points count:" + score);
-
     }
 
     public void Reset()
@@ -49,6 +46,5 @@ public class ScoreManager : MonoBehaviour {
     {
         PlayerPrefs.SetInt("score", score);
         scoreText.text = "Score: " + score;
-        //print("Points count:" + score);
     }
 }

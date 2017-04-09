@@ -26,7 +26,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4337577505432522
 Transform:
   m_ObjectHideFlags: 1
@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a2058ba6ef6684ebfb130b51f2fcc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemPool: {fileID: 0}
   worldPrefab: {fileID: 1187776398774674, guid: dcc082b13f44f3f4d9aa664fa3dbae3f,
     type: 2}
   fogPrefab: {fileID: 1180964626356768, guid: 29162dcd4a39ee242b7c5f76a3188e76, type: 2}
@@ -58,3 +59,9 @@ MonoBehaviour:
     type: 2}
   levelName: Level1
   isRandom: 0
+  spawnables:
+  - {fileID: 1459670635172032, guid: b3ce3d78bf0ceb344adce69cfb1b9894, type: 2}
+  - {fileID: 1085780621445466, guid: 518aaa4fe706989458e0d032f0c700da, type: 2}
+  - {fileID: 1851980066611796, guid: e5417f9cddcd52143be6da75210f1527, type: 2}
+  - {fileID: 1738025306168756, guid: e7adc21b0177e2d43b65365ee044e0d0, type: 2}
+  - {fileID: 1568878544188838, guid: f814464b3c55bd244afb22e6fc290bd5, type: 2}

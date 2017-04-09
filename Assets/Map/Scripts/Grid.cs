@@ -16,6 +16,7 @@ public class Grid : MonoBehaviour
     public bool savePacked;
     public bool load;
     public bool isLoaded = false;
+    public bool clear;
 
     public World world;
     public WorldPos pos;
@@ -55,6 +56,12 @@ public class Grid : MonoBehaviour
             load = false;
             SaveAndLoadManager.LoadGrid(this);
         }
+        if (clear && world.isFogGenerator)
+        {
+            clear = false;
+            ClearTiles();
+            UpdateGrid();
+        }
     }
 
     public void SetTile(int x, int y, GridTile tile)
@@ -65,6 +72,17 @@ public class Grid : MonoBehaviour
     public GridTile GetTile(int x, int y)
     {
         return tiles[x, y];
+    }
+
+    public void ClearTiles()
+    {
+        for (int x = 0; x < gridSize; x++)
+        {
+            for (int y = 0; y < gridSize; y++)
+            {
+                SetTile(x, y, new GridTile(GridTile.TileTypes.Empty));
+            }
+        }
     }
     
     public void RenewTiles()
