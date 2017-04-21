@@ -58,7 +58,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 1285532990844738, guid: 624ac1cf12bbb0144a400585172ccdfe,
     type: 2}
   levelName: Level1
-  isRandom: 0
+  isRandom: 1
   spawnables:
   - {fileID: 1459670635172032, guid: b3ce3d78bf0ceb344adce69cfb1b9894, type: 2}
   - {fileID: 1085780621445466, guid: 518aaa4fe706989458e0d032f0c700da, type: 2}

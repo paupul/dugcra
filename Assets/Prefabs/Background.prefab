@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1388668440181786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.37, y: 0.12, z: 0}
+  m_LocalPosition: {x: 0.37, y: 0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4863414962571902}
@@ -165,8 +165,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
-  m_Color: {r: 0.9632353, g: 0.8629891, b: 0.6232699, a: 1}
-  m_Intensity: 0.2
+  m_Color: {r: 0.9632353, g: 0.8629891, b: 0.373, a: 1}
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 50
   m_CookieSize: 10
@@ -247,7 +247,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1138697300
+  randomSeed: 850557627
   InitialModule:
     serializedVersion: 3
     enabled: 1

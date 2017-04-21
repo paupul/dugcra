@@ -6,14 +6,6 @@ using System;
 
 public static class SaveAndLoadManager
 {
-    //save/load:
-    //inventory
-    //!grids!
-    //characters
-    //player info
-    //global inventory
-    //quests
-    //dialogue
 
     public static string windowsSaveLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
@@ -65,17 +57,17 @@ public static class SaveAndLoadManager
         }
         save.ToArray(t);
 
-        File.WriteAllText(SaveLocation(grid.ToString(), grid.world.worldName), save.saveToString(savePacked));
+        File.WriteAllText(SaveLocation(grid.ToString(), grid.world.levelManager.levelName), save.saveToString(savePacked));
     }
 
     public static bool LoadGrid(Grid grid)
     {
-        if (!File.Exists(SaveLocation(grid.ToString())))
+        if (!File.Exists(SaveLocation(grid.ToString(), grid.world.levelManager.levelName)))
         {
             return false;
         }
 
-        Stream file = new FileStream(SaveLocation(grid.ToString(), grid.world.worldName), FileMode.Open);
+        Stream file = new FileStream(SaveLocation(grid.ToString(), grid.world.levelManager.levelName), FileMode.Open);
         StreamReader text = new StreamReader(file);
         string t = text.ReadToEnd();
         file.Close();
