@@ -57,17 +57,17 @@ public static class SaveAndLoadManager
         }
         save.ToArray(t);
 
-        File.WriteAllText(SaveLocation(grid.ToString(), grid.world.levelManager.levelName), save.saveToString(savePacked));
+        File.WriteAllText(SaveLocation(grid.ToString(), LevelManager.levelName), save.saveToString(savePacked));
     }
 
     public static bool LoadGrid(Grid grid)
     {
-        if (!File.Exists(SaveLocation(grid.ToString(), grid.world.levelManager.levelName)))
+        if (!File.Exists(SaveLocation(grid.ToString(), LevelManager.levelName)))
         {
             return false;
         }
 
-        Stream file = new FileStream(SaveLocation(grid.ToString(), grid.world.levelManager.levelName), FileMode.Open);
+        Stream file = new FileStream(SaveLocation(grid.ToString(), LevelManager.levelName), FileMode.Open);
         StreamReader text = new StreamReader(file);
         string t = text.ReadToEnd();
         file.Close();

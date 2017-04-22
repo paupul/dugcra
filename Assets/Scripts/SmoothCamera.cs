@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SmoothCamera : MonoBehaviour {
+public class SmoothCamera : MonoBehaviour
+{
 
     public Transform Lookat;
     private bool smooth = true;
@@ -10,15 +11,18 @@ public class SmoothCamera : MonoBehaviour {
 
     private void LateUpdate()
     {
-        Vector3 desiredPosition = Lookat.transform.position + offset;
-        
-        if (smooth)
+        if (Lookat != null)
         {
-            transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        }
-        else
-        {
-            transform.position = desiredPosition;
+            Vector3 desiredPosition = Lookat.transform.position + offset;
+
+            if (smooth)
+            {
+                transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+            }
+            else
+            {
+                transform.position = desiredPosition;
+            }
         }
     }
 }

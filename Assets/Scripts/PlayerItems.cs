@@ -39,7 +39,7 @@ public class PlayerItems : MonoBehaviour
             gameSounds.PlaySound(4);
             spear++;
             scoreManager.AddPoints(pointsForItem);
-            print("Spear count:" + spear);
+           // print("Spear count:" + spear);
             other.gameObject.SetActive(false);
 
         }
@@ -48,7 +48,7 @@ public class PlayerItems : MonoBehaviour
             gameSounds.PlaySound(4);
             ladder++;
             scoreManager.AddPoints(pointsForItem);
-            print("Ladder count:" + ladder);
+            //print("Ladder count:" + ladder);
             other.gameObject.SetActive(false);
         }
 
@@ -58,7 +58,7 @@ public class PlayerItems : MonoBehaviour
             {
                 
                 game_over_text.text = "You got butchered by the monster.";
-                print("Game over...:");
+                //print("Game over...:");
                 game_over.SetActive(true);
                 gameSounds.PlaySound(2);
                 Time.timeScale = 0;
@@ -68,7 +68,7 @@ public class PlayerItems : MonoBehaviour
             {
                 spear--;
                 gameSounds.PlaySound(5);
-                print("Spear count:" + spear);
+                //print("Spear count:" + spear);
                 scoreManager.AddPoints(pointsForEnemy);
                 other.gameObject.SetActive(false);
             }
@@ -79,7 +79,7 @@ public class PlayerItems : MonoBehaviour
             {
                 Time.timeScale = 0;
                 game_over_text.text = "You died in agony inside a pit.";
-                print("Game over...:");
+                //print("Game over...:");
                 game_over.SetActive(true);
                 gameSounds.PlaySound(2);
                 //  SceneManager.LoadScene(0);
@@ -88,7 +88,7 @@ public class PlayerItems : MonoBehaviour
             {
                 ladder--;
                 gameSounds.PlaySound(5);
-                print("Ladder count:" + ladder);
+                //print("Ladder count:" + ladder);
                 scoreManager.AddPoints(pointsForEnemy);
                 other.gameObject.SetActive(false);
             }

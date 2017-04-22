@@ -57,11 +57,10 @@ MonoBehaviour:
   fogPrefab: {fileID: 1180964626356768, guid: 29162dcd4a39ee242b7c5f76a3188e76, type: 2}
   playerPrefab: {fileID: 1285532990844738, guid: 624ac1cf12bbb0144a400585172ccdfe,
     type: 2}
-  levelName: Level1
-  isRandom: 1
   spawnables:
   - {fileID: 1459670635172032, guid: b3ce3d78bf0ceb344adce69cfb1b9894, type: 2}
   - {fileID: 1085780621445466, guid: 518aaa4fe706989458e0d032f0c700da, type: 2}
   - {fileID: 1851980066611796, guid: e5417f9cddcd52143be6da75210f1527, type: 2}
   - {fileID: 1738025306168756, guid: e7adc21b0177e2d43b65365ee044e0d0, type: 2}
   - {fileID: 1568878544188838, guid: f814464b3c55bd244afb22e6fc290bd5, type: 2}
+  loaded: 0

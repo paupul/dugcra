@@ -3,17 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
-{    
+{
+    public static List<string> levels = new List<string>();
+
     public GameObject itemPool;
     public GameObject worldPrefab;
     public GameObject fogPrefab;
     public GameObject playerPrefab;
-    public string levelName;
-    public bool isRandom;
+    public static string levelName;
+    public static bool isRandom;
+    public static int levelIndex;
     public List<GameObject> spawnables;
+    public bool loaded = false;
 
-    void Awake()
+    void OnEnable()
     {
+        if (loaded)
+        {
+            return;
+        }
+        levelIndex = levels.FindIndex(o => o.Equals(levelName));
+
         GameObject world = Instantiate(worldPrefab);
         GameObject fog = Instantiate(fogPrefab);
         GameObject player = Instantiate(playerPrefab);
@@ -36,6 +46,8 @@ public class LevelManager : MonoBehaviour
         //playerComp.map = Camera.main.gameObject;
 
         Camera.main.GetComponent<SmoothCamera>().Lookat = player.transform;
+
+        loaded = true;
     }
 
     public void Spawn(Grid grid)
