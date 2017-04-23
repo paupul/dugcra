@@ -9,17 +9,21 @@ public class PlayerItems : MonoBehaviour
 
     private int spear;
     private int ladder;
+    private int level;
+    public int endLevel;
     private static int pointsForItem;
     private static int pointsForEnemy;
     private static int pointsForChest;
     public GameObject game_over;
     public GameObject next_level;
+    public GameObject game_finished;
     public ScoreManager scoreManager;
     private GameSounds gameSounds;
     public Text game_over_text;
 
     void Start()
     {
+        level = 0;
         spear = 0;
         ladder = 0;
         pointsForItem = 5;
@@ -95,11 +99,25 @@ public class PlayerItems : MonoBehaviour
         }
         else if (other.tag == "Chest")
         {
-            scoreManager.AddPoints(pointsForChest);
-            scoreManager.SaveCurrentPoints();
-            Time.timeScale = 0;
-            gameSounds.PlaySound(3);
-            next_level.SetActive(true);
+            if(level<=endLevel)
+            {
+                level++;
+                print(level);
+                scoreManager.AddPoints(pointsForChest);
+                scoreManager.SaveCurrentPoints();
+                Time.timeScale = 0;
+                gameSounds.PlaySound(3);
+                next_level.SetActive(true);
+            }
+            else
+            {
+                scoreManager.AddPoints(pointsForChest);
+                scoreManager.SaveCurrentPoints();
+                Time.timeScale = 0;
+                gameSounds.PlaySound(3);
+                game_finished.SetActive(true);
+            }
+            
         }
     }
 }

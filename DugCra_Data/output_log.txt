@@ -1,0 +1,52 @@
+Initialize engine version: 5.6.0f3 (497a0f351392)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1060 6GB (ID=0x1c03)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+    Driver:   21.21.13.7653
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\pulei\Documents\GitHub\dugcra\DugCra_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\pulei\Documents\GitHub\dugcra\DugCra_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\pulei\Documents\GitHub\dugcra\DugCra_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\pulei\Documents\GitHub\dugcra\DugCra_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\pulei\Documents\GitHub\dugcra\DugCra_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\pulei\Documents\GitHub\dugcra\DugCra_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\pulei\Documents\GitHub\dugcra\DugCra_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\pulei\Documents\GitHub\dugcra\DugCra_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\pulei\Documents\GitHub\dugcra\DugCra_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\pulei\Documents\GitHub\dugcra\DugCra_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.095 seconds
+Platform assembly: C:\Users\pulei\Documents\GitHub\dugcra\DugCra_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\pulei\Documents\GitHub\dugcra\DugCra_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 3.646845 ms
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.870615 ms
+
+Unloading 20 unused Assets to reduce memory usage. Loaded Objects now: 793.
+Total: 0.573595 ms (FindLiveObjects: 0.041348 ms CreateObjectMapping: 0.023753 ms MarkObjects: 0.438993 ms  DeleteObjects: 0.068913 ms)
+
+1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.607025 ms
+
+Unloading 53 unused Assets to reduce memory usage. Loaded Objects now: 790.
+Total: 0.563331 ms (FindLiveObjects: 0.041348 ms CreateObjectMapping: 0.026099 ms MarkObjects: 0.432249 ms  DeleteObjects: 0.063048 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.942209 ms
+
+Unloading 294 unused Assets to reduce memory usage. Loaded Objects now: 499.
+Total: 3.186151 ms (FindLiveObjects: 0.054837 ms CreateObjectMapping: 0.046626 ms MarkObjects: 0.480635 ms  DeleteObjects: 2.602879 ms)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 1f1c -> priority: 1 
+  Thread -> id: 1ee8 -> priority: 1 
