@@ -9,8 +9,8 @@ public class PlayerItems : MonoBehaviour
 
     private int spear;
     private int ladder;
-    private int level;
-    public int endLevel;
+    static private int level;
+    static private int endLevel=5;
     private static int pointsForItem;
     private static int pointsForEnemy;
     private static int pointsForChest;
@@ -23,7 +23,6 @@ public class PlayerItems : MonoBehaviour
 
     void Start()
     {
-        level = 0;
         spear = 0;
         ladder = 0;
         pointsForItem = 5;
@@ -102,7 +101,7 @@ public class PlayerItems : MonoBehaviour
             if(level<=endLevel)
             {
                 level++;
-                //print(level);
+                print(level);
                 scoreManager.AddPoints(pointsForChest);
                 scoreManager.SaveCurrentPoints();
                 Time.timeScale = 0;
@@ -111,10 +110,10 @@ public class PlayerItems : MonoBehaviour
             }
             else
             {
+                level = 0;
                 scoreManager.AddPoints(pointsForChest);
                 scoreManager.SaveCurrentPoints();
                 Time.timeScale = 0;
-                gameSounds.PlaySound(3);
                 game_finished.SetActive(true);
             }
             
