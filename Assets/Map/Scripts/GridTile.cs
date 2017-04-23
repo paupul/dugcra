@@ -15,7 +15,9 @@ public class GridTile
     public TileTypes[] adjTiles = new TileTypes[4];
     [NonSerialized]
     public TileTypes[] diagTiles = new TileTypes[4];
-    public enum ContainedObject { Empty, Ladder, Pit, Spear, Enemy, Chest }
+    [NonSerialized]
+    public bool itemSpawned = false;
+    public enum ContainedObject { Empty, Ladder, Pit, Spear, Enemy, Chest, StartingPoint }
     public ContainedObject containedObject = ContainedObject.Empty;
     //  0 /0 1
     // /1   /2
@@ -24,14 +26,18 @@ public class GridTile
     [NonSerialized]
     public bool changed = false;
 
+    [NonSerialized]
+    public Tile oldTile = new Tile() { x = -1, y = -1 };
+
     public GridTile()
     {
 
     }
 
-    public GridTile(TileTypes type)
+    public GridTile(TileTypes type, ContainedObject obj = ContainedObject.Empty)
     {
         this.type = type;
+        containedObject = obj;
     }
 
     public virtual MeshData TileData(Grid grid, int x, int y, MeshData meshData)
@@ -64,8 +70,14 @@ public class GridTile
         Tile tile = new Tile();
         if (type == TileTypes.Ground)
         {
-            tile.x = UnityEngine.Random.Range(5, 7);
-            tile.y = UnityEngine.Random.Range(5, 7);
+            if (oldTile.x == -1 || oldTile.y == -1)
+            {
+                oldTile.x = tile.x = UnityEngine.Random.Range(5, 7);
+                oldTile.y = tile.y = UnityEngine.Random.Range(5, 7);
+            }
+
+            tile.x = oldTile.x;
+            tile.y = oldTile.y;
         }
         else if (type == TileTypes.Wall)
         {

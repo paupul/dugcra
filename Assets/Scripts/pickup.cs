@@ -13,9 +13,9 @@ public class pickup : MonoBehaviour {
         {
             if(child.gameObject.tag == collision.gameObject.tag)
             {
-                string c = child.Find("Text").GetComponent<Text>().text;
-                int tcount = System.Int32.Parse(c) + 1;
-                child.Find("Text").GetComponent<Text>().text = "" + tcount;
+                string c = child.GetChild(0).GetComponent<Text>().text;
+                int tcount = int.Parse(c) + 1;
+                child.GetChild(0).GetComponent<Text>().text = "" + tcount;
                 return;
             }
 
@@ -24,9 +24,9 @@ public class pickup : MonoBehaviour {
                 if (child.gameObject.tag == "Spear")
             {
                
-                    string c = child.Find("Text").GetComponent<Text>().text;
-                    int tcount = System.Int32.Parse(c) - 1;
-                    child.Find("Text").GetComponent<Text>().text = "" + tcount;
+                    string c = child.GetChild(0).GetComponent<Text>().text;
+                    int tcount = int.Parse(c) - 1;
+                    child.GetChild(0).GetComponent<Text>().text = "" + tcount;
                     return;
                 }
             }
@@ -34,9 +34,9 @@ public class pickup : MonoBehaviour {
             {
                 if (child.gameObject.tag == "Ladder")
                 {
-                    string c = child.Find("Text").GetComponent<Text>().text;
-                    int tcount = System.Int32.Parse(c) - 1;
-                    child.Find("Text").GetComponent<Text>().text = "" + tcount;
+                    string c = child.GetChild(0).GetComponent<Text>().text;
+                    int tcount = int.Parse(c) - 1;
+                    child.GetChild(0).GetComponent<Text>().text = "" + tcount;
                     return;
                 }
             }
@@ -47,12 +47,12 @@ public class pickup : MonoBehaviour {
         if(collision.tag == "Ladder")
         {
             i = Instantiate(inventoryIcons[0]);
-            i.transform.SetParent(inventoryPanel.transform);
+            i.transform.SetParent(inventoryPanel.transform, false);
         }
         else if (collision.tag == "Spear")
         {
             i = Instantiate(inventoryIcons[1]);
-            i.transform.SetParent(inventoryPanel.transform);
+            i.transform.SetParent(inventoryPanel.transform, false);
         }
 
     }

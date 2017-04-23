@@ -74,6 +74,16 @@ public class Grid : MonoBehaviour
         return tiles[x, y];
     }
 
+    public GridTile GetTile(Vector2 position)
+    {
+        return tiles[(int)position.x, (int)position.y];
+    }
+
+    public WorldPos GetTilePos(Vector2 position)
+    {
+        return new WorldPos((int)position.x, (int)position.y);
+    }
+
     public void ClearTiles()
     {
         for (int x = 0; x < gridSize; x++)

@@ -42,15 +42,37 @@ public class World : MonoBehaviour
         if (isFogGenerator || isRandom || !SaveAndLoadManager.LoadGrid(newGrid))
         {
             newGrid = gen.GridGen(newGrid, out isPointGenerated, out startingGrid, out startingPoint, isFogGenerator);
+            newGrid = gen.GridConnectionGen(newGrid);
+            newGrid = gen.GridItemGen(newGrid);
+            if (!isFogGenerator)
+            {
+                newGrid.SetTile(startingPoint.x, startingPoint.y, new GridTile(GridTile.TileTypes.Ground, GridTile.ContainedObject.StartingPoint));
+            }
         }
 
         //newGrid = gen.GridTileGen(newGrid, startingPoint.x, startingPoint.y, GridTile.TileTypes.Empty);
-        newGrid = gen.GridConnectionGen(newGrid);
-
-        newGrid = gen.GridItemGen(newGrid);
 
         if (!isFogGenerator)
         {
+            bool flag = false;
+            for (int xx = 0; xx < Grid.gridSize; xx++)
+            {
+                for (int yy = 0; yy < Grid.gridSize; yy++)
+                {
+                    if (newGrid.tiles[xx, yy].containedObject == GridTile.ContainedObject.StartingPoint)
+                    {
+                        startingPoint = new WorldPos(xx, yy);
+                        startingGrid = new WorldPos(xx, yy);
+                        flag = true;
+                        isPointGenerated = true;
+                        continue;                        
+                    }
+                }
+                if (flag)
+                {
+                    continue;
+                }
+            }
             levelManager.Spawn(newGrid);
         }
 
@@ -63,6 +85,20 @@ public class World : MonoBehaviour
         float multiple = Grid.gridSize;
         pos.x = Mathf.FloorToInt(x / multiple) * Grid.gridSize;
         pos.y = Mathf.FloorToInt(y / multiple) * Grid.gridSize;
+
+        Grid containerGrid = null;
+
+        grids.TryGetValue(pos, out containerGrid);
+
+        return containerGrid;
+    }
+
+    public Grid GetGrid(Vector2 position)
+    {
+        WorldPos pos = new WorldPos();
+        float multiple = Grid.gridSize;
+        pos.x = Mathf.FloorToInt(position.x / multiple) * Grid.gridSize;
+        pos.y = Mathf.FloorToInt(position.y / multiple) * Grid.gridSize;
 
         Grid containerGrid = null;
 

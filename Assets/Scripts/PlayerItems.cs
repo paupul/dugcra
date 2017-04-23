@@ -102,7 +102,7 @@ public class PlayerItems : MonoBehaviour
             if(level<=endLevel)
             {
                 level++;
-                print(level);
+                //print(level);
                 scoreManager.AddPoints(pointsForChest);
                 scoreManager.SaveCurrentPoints();
                 Time.timeScale = 0;
