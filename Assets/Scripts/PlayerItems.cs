@@ -98,9 +98,8 @@ public class PlayerItems : MonoBehaviour
         }
         else if (other.tag == "Chest")
         {
-            if(level<=endLevel)
+            if(LevelManager.levelIndex + 1 < LevelManager.levels.Count)
             {
-                level++;
                 scoreManager.AddPoints(pointsForChest);
                 scoreManager.SaveCurrentPoints();
                 Time.timeScale = 0;
@@ -109,7 +108,6 @@ public class PlayerItems : MonoBehaviour
             }
             else
             {
-                level = 0;
                 scoreManager.AddPoints(pointsForChest);
                 scoreManager.SaveCurrentPoints();
                 Time.timeScale = 0;
