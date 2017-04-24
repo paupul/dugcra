@@ -47,6 +47,7 @@ public class SettingsManager : MonoBehaviour {
     public void OnResolutionChange()
     {
         Screen.SetResolution(resolutions[resolutionDropDown.value].width, resolutions[resolutionDropDown.value].height, Screen.fullScreen);
+        gamesettings.resolutionIndex = resolutionDropDown.value;
     }
     public void OnMusicVolueme()
     {
@@ -65,6 +66,7 @@ public class SettingsManager : MonoBehaviour {
         fullscreenToggle.isOn = gamesettings.fullscreen;
         resolutionDropDown.value = gamesettings.resolutionIndex;
         musicToggle.isOn = gamesettings.musicMute;
+
 
         resolutionDropDown.RefreshShownValue();
     }
